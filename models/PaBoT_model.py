@@ -20,7 +20,7 @@ class PaBoTModel(BaseModel):
         """
         parser.add_argument('--lambda_GAN', type=float, default=1.0, help='weight for GAN loss')        
         parser.add_argument('--lambda_rec', type=float, default=5.0, help='weight for rec loss')        
-        parser.add_argument('--lambda_idt', type=float, default=5.0, help='weight for idt loss')        #
+        parser.add_argument('--lambda_idt', type=float, default=5.0, help='weight for idt loss')        
         parser.add_argument('--lambda_bone', type=float, default=5.0, help='weight for bone loss')
         parser.add_argument('--lambda_kl', type=float, default=0.01, help='weight for kl loss')
         parser.add_argument('--lambda_path', type=float, default=0.1, help='weight for path loss)')
@@ -67,7 +67,7 @@ class PaBoTModel(BaseModel):
         self.netG = networks.define_G(opt.input_nc, opt.output_nc, opt.ngf, opt.netG, opt.normG, not opt.no_dropout, opt.init_type, opt.init_gain, opt.no_antialias, opt.no_antialias_up, self.gpu_ids, opt)
         
         # G_{bone}(x)  
-        self.netG_bone = networks.define_G(opt.input_nc, 3, opt.ngf, "bone_G", opt.normG, not opt.no_dropout,
+        self.netG_bone = networks.define_G(opt.input_nc, 1, opt.ngf, "bone_G", opt.normG, not opt.no_dropout,
                                       opt.init_type, opt.init_gain, opt.no_antialias, opt.no_antialias_up, self.gpu_ids,
                                       opt)
         # Sobel(y)
@@ -223,9 +223,9 @@ class PaBoTModel(BaseModel):
         self.loss_d2 = torch.mean(d2)
 
         loss_path = 0
-        cam = rgb_to_grayscale(self.G_Bone.detach())
+        cam = self.G_Bone.detach()  
         cam = TF.gaussian_blur(cam, kernel_size=(5,5), sigma=(1.0,1.0))
-        
+    
         for id, feats in enumerate(features):
             x_d1, x_d2 = torch.chunk(feats, 2, dim=0)
             cams = torch.nn.functional.interpolate(cam, size=x_d1.shape[2:], mode='bilinear')
