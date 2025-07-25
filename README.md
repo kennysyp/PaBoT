@@ -66,6 +66,3 @@ This work is inspired by and builds upon the method proposed in:
   pages={10177--10187},
   year={2023}
 }
-
-
-
