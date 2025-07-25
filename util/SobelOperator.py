@@ -20,7 +20,8 @@ class SobelOperator(nn.Module):
         x = torch.sqrt(grad_x ** 2 + grad_y ** 2 + self.epsilon)
 
         x = x.view(b, c, h, w)
-
+        if c > 1:
+            x = x.mean(dim=1, keepdim=True)
         return x
 
 
@@ -32,3 +33,4 @@ class GradLoss(nn.Module):
     def forward(self, pr, gt):
         grad_loss = F.l1_loss(gt, pr)
         return grad_loss
+
