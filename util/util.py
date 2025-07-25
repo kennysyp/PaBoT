@@ -42,23 +42,36 @@ def find_class_in_module(target_cls_name, module):
 
 
 def tensor2im(input_image, imtype=np.uint8):
-    """"Converts a Tensor array into a numpy image array.
+    """Converts a Tensor array into a numpy image array.
 
     Parameters:
-        input_image (tensor) --  the input image tensor array
-        imtype (type)        --  the desired type of the converted numpy array
+        input_image (tensor or ndarray) -- the input image tensor or numpy array
+        imtype (type)                   -- the desired type of the converted numpy array
     """
     if not isinstance(input_image, np.ndarray):
-        if isinstance(input_image, torch.Tensor):  # get the data from a variable
+        if isinstance(input_image, torch.Tensor):
             image_tensor = input_image.data
         else:
             return input_image
-        image_numpy = image_tensor[0].clamp(-1.0, 1.0).cpu().float().numpy()  # convert it into a numpy array
-        if image_numpy.shape[0] == 1:  # grayscale to RGB
-            image_numpy = np.tile(image_numpy, (3, 1, 1))
-        image_numpy = (np.transpose(image_numpy, (1, 2, 0)) + 1) / 2.0 * 255.0  # post-processing: tranpose and scaling
-    else:  # if it is a numpy array, do nothing
+
+        image_numpy = image_tensor[0].cpu().float().numpy()
+
+        if image_numpy.shape[0] == 1:  
+            image_numpy = image_numpy[0]  # shape: (H, W)
+            min_val = image_numpy.min()
+            max_val = image_numpy.max()
+            image_numpy = (image_numpy - min_val) / (max_val - min_val + 1e-5) * 255.0
+            image_numpy[0, :] = 0
+            image_numpy[-1, :] = 0
+            image_numpy[:, 0] = 0
+            image_numpy[:, -1] = 0
+        else:  
+            image_numpy = image_tensor[0].clamp(-1.0, 1.0).cpu().float().numpy()
+            image_numpy = np.transpose(image_numpy, (1, 2, 0))  # (C,H,W) -> (H,W,C)
+            image_numpy = (image_numpy + 1) / 2.0 * 255.0
+    else:
         image_numpy = input_image
+
     return image_numpy.astype(imtype)
 
 
@@ -88,9 +101,14 @@ def save_image(image_numpy, image_path, aspect_ratio=1.0):
         image_numpy (numpy array) -- input numpy array
         image_path (str)          -- the path of the image
     """
-
-    image_pil = Image.fromarray(image_numpy)
-    h, w, _ = image_numpy.shape
+    if image_numpy.ndim == 2:
+        image_pil = Image.fromarray(image_numpy.astype(np.uint8), mode='L')
+    else:
+        image_pil = Image.fromarray(image_numpy)
+    if image_numpy.ndim == 2:
+        h, w = image_numpy.shape
+    else:
+        h, w, _ = image_numpy.shape
 
     if aspect_ratio is None:
         pass
