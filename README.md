@@ -34,6 +34,7 @@ python train.py --dataroot=./datasets/Head --direction=BtoA --lambda_path=0.1 --
 
 # Test the model
 # Make sure to place the trained checkpoints in `checkpoints/Head`
+Pretrained Models： https://drive.google.com/drive/folders/1O7Ke4BHM1PpnEV9WPhxqO39803tAuMiG?usp=drive_link
 python test.py --dataroot=./datasets/Head --name=Head --direction=BtoA --num_test 2250 --epoch 100
 ```
 
