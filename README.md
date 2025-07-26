@@ -61,5 +61,6 @@ If you find this work useful in your research or applications, please consider c
 
 ## 📚 Acknowledgments
 
-This code utilizes libraries and components from the Santa ([Mid-Push/santa](https://github.com/Mid-Push/santa)) and CUT ([taesungp/contrastive-unpaired-translation](https://github.com/taesungp/contrastive-unpaired-translation)) repositories.  
+This code utilizes libraries and components from the [Santa](https://github.com/Mid-Push/santa) and [CUT](https://github.com/taesungp/contrastive-unpaired-translation) repositories.  
 We sincerely thank the authors of these projects for making their code publicly available.
+
