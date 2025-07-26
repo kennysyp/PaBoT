@@ -59,7 +59,7 @@ If you find this work useful in your research or applications, please consider c
 ```
 
 
-## 📚 References
+## 📚 Acknowledgments
 
 This work is inspired by and builds upon the method proposed in:
 
@@ -71,3 +71,4 @@ This work is inspired by and builds upon the method proposed in:
   pages={10177--10187},
   year={2023}
 }
+```
