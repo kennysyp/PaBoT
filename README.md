@@ -57,18 +57,3 @@ If you find this work useful in your research or applications, please consider c
   year={2025}
 }
 ```
-
-
-## 📚 Acknowledgments
-
-This work is inspired by and builds upon the method proposed in:
-
-```bibtex
-@inproceedings{xie2023unpaired,
-  title={Unpaired Image-to-Image Translation With Shortest Path Regularization},
-  author={Xie, Shaoan and Xu, Yanwu and Gong, Mingming and Zhang, Kun},
-  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
-  pages={10177--10187},
-  year={2023}
-}
-```
