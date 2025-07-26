@@ -40,7 +40,7 @@ python test.py --dataroot=./datasets/Head --name=Head --direction=BtoA --num_tes
 ## 📥 Pretrained Models
 
 - [Head](https://drive.google.com/drive/folders/1O7Ke4BHM1PpnEV9WPhxqO39803tAuMiG?usp=drive_link)
-
+- [SynthRAD](https://drive.google.com/drive/folders/1O7Ke4BHM1PpnEV9WPhxqO39803tAuMiG?usp=drive_link)
 
 ## 📌 Citation
 
