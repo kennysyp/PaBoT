@@ -22,7 +22,7 @@ Evaluations conducted on three datasets demonstrate that our method outperforms 
 - [`unaligned_dataset.py`](data/unaligned_dataset.py) includes a dataset class that can load unaligned/unpaired datasets.  
 It assumes that two directories host training images from domain A `/dataset/trainA` and from domain B `/dataset/trainB`, respectively.  
 Similarly, you need to prepare directories `/dataset/testA` and `/dataset/testB` for testing, and `/dataset/valA` and `/dataset/valB` for validation.
-For reference, we also provide partial examples of the Head dataset for training and testing, which can be found in `datasets/Head`.
+For reference, we also provide partial examples of the [Head dataset](datasets/Head) for training and testing, as well as links to the [SynthRAD dataset](https://zenodo.org/records/7260705) and the [Pelvic dataset](https://zenodo.org/records/583096).
 
 ---
 
