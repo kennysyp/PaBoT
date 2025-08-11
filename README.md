@@ -24,6 +24,7 @@ It assumes that two directories host training images from domain A `/dataset/tra
 Similarly, you need to prepare directories `/dataset/testA` and `/dataset/testB` for testing, and `/dataset/valA` and `/dataset/valB` for validation.
 
 
+
 ---
 
 ## 🚀 Training & Testing
